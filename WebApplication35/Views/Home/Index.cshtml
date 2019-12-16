@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        <label>User name</label><input type="text" id="txt1"  />
+        <label>User phn</label><input type="text" id="txt2" />
+        <input type="button" value="submit" id="btn1" />
+    </div>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        $(document).on("click", "#btn1", function () {
+            var uname = $("#txt1").val();
+            var phn = $("#txt2").val();
+            if (window.FormData !== undefined) {
+                var fdata = new FormData();
+                fdata.append("_uname", uname);
+                fdata.append("_phn", phn);
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("submit","Home")',
+                    contentType: false,
+                    processData: false,
+                    data: fdata,
+                    dataType: "Json",
+                    success: function () {
+                        alert("done");
+                    }
+                })
+            }
+        })
+    </script>
+</body>
+</html>
